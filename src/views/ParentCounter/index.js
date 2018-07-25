@@ -7,7 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
 
-const ParentCounter = ({ classes, add, del, reset }) => {
+const ParentCounter = ({ classes,add, del, reset }) => {
     return (
         <div>
             <Button onClick={add} variant="fab" color="primary" aria-label="Add" className={classes.button}>
