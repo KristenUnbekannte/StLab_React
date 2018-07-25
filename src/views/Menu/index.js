@@ -18,8 +18,8 @@ const Menu = ({ classes, about, counters }) => {
             fullWidth
             indicatorColor="secondary"
             textColor="secondary"> */}
-            <Link to="/about" className={classes.link}><Tab icon={<PersonPinIcon />} label="О нас" /></Link>
-            <Link to="/counters" className={classes.link}><Tab icon={<AlarmIcon />} label="Счетчики" /></Link>
+            <Tab icon={<PersonPinIcon />} label="О нас" href="#/about"/>
+            <Tab icon={<AlarmIcon />} label="Счетчики" href="#/counters" />
         </Tabs>
     </Paper>
     )
