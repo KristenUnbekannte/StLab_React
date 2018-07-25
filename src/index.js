@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import CounterContainer from './containers/CounterContainer';
 import registerServiceWorker from './registerServiceWorker';
+import ParentContainer  from './containers/ParentContainer';
 
-ReactDOM.render(<CounterContainer />, document.getElementById('root'));
+ReactDOM.render(<ParentContainer  />, document.getElementById('root'));
 registerServiceWorker();
