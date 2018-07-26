@@ -5,7 +5,7 @@ import Login from '../views/Login/index';
 class LoginContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { mail: "", password: "", mailIsValid: "", passwordIsValid: "" };
+        this.state = { mail: "", password: "", mailIsValid: true, passwordIsValid: true };
 
         this.onChangeMail = this.onChangeMail.bind(this);
         this.onChangePass = this.onChangePass.bind(this);
@@ -26,17 +26,12 @@ class LoginContainer extends React.Component {
         let passIsValid = this.validatePassword(this.state.password);
 
         if (mailIsValid && passIsValid) {
-            console.log(`Mail: ${this.state.mail}`);
-            console.log(`Password: ${this.state.password}`);
-            this.setState({ mail: "", password: "", mailIsValid: "", passwordIsValid: "" });
+            console.log(`Mail: ${this.state.mail}\nPassword: ${this.state.password}`);
+            alert(JSON.stringify({mail: this.state.mail, password: this.state.password}));
+            this.setState({ mail: "", password: "", mailIsValid: true, passwordIsValid: true });
         }
         else {
-            if (!mailIsValid) {
-                this.setState({ mailIsValid: true });
-            }
-            if (!passIsValid) {
-                this.setState({ passwordIsValid: true });
-            }
+            this.setState({ mailIsValid: mailIsValid, passwordIsValid: passIsValid });
         }
     }
     validateMail(mail) {
@@ -53,11 +48,10 @@ class LoginContainer extends React.Component {
                 <Login handleSubmit={this.handleSubmit}
                     onChangeMail={this.onChangeMail}
                     onChangePass={this.onChangePass}
-                    error={this.state.error}
                     mail={this.state.mail}
                     password={this.state.password}
                     mailError={this.state.mailIsValid}
-                    passwordError={this.state.passwordError}
+                    passwordError={this.state.passwordIsValid}
                 />
             </div>
         );

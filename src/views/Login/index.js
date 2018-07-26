@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { styles } from './style';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
@@ -9,7 +9,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 
 const Login = ({ classes, handleSubmit, mail, password, onChangeMail, onChangePass, mailError, passwordError }) => {
-    return <Paper  className={classes.container}>
+    return <Paper className={classes.container}>
         <form onSubmit={handleSubmit} className={classes.form}>
             <FormControl className={classes.margin}>
                 <InputLabel
@@ -25,7 +25,7 @@ const Login = ({ classes, handleSubmit, mail, password, onChangeMail, onChangePa
                     classes={{
                         underline: classes.cssUnderline,
                     }}
-                    className={mailError?classes.input_error:classes.input}
+                    className={mailError ? classes.input : classes.input_error}
                     id="custom-css-input-mail"
                     value={mail} onChange={onChangeMail}
                 />
@@ -44,7 +44,7 @@ const Login = ({ classes, handleSubmit, mail, password, onChangeMail, onChangePa
                     classes={{
                         underline: classes.cssUnderline,
                     }}
-                    className={passwordError?classes.input_error:classes.input}
+                    className={passwordError ? classes.input : classes.input_error}
                     id="custom-css-input-pass"
                     type="password" value={password} onChange={onChangePass}
                 />
@@ -62,5 +62,12 @@ const Login = ({ classes, handleSubmit, mail, password, onChangeMail, onChangePa
 
 Login.propTypes = {
     classes: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func,
+    mail: PropTypes.string,
+    password: PropTypes.string,
+    onChangeMail: PropTypes.func,
+    onChangePass: PropTypes.func,
+    mailError: PropTypes.bool,
+    passwordError: PropTypes.bool
 }
 export default withStyles(styles)(Login);
