@@ -1,15 +1,10 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { styles } from './style';
+import { Button, Card, CardActions, CardContent, Typography } from '@material-ui/core/';
 import PropTypes from 'prop-types';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import styles from './style';
 
-
-const Counter = ({ reset, increase, decrease, count, classes }) => {
+const Counter = ({ onClickResetCount, onClickIncreaseCount, onClickDecreaseCount, count, classes }) => {
   return (
     <Card className={classes.card}>
       <CardContent>
@@ -18,13 +13,13 @@ const Counter = ({ reset, increase, decrease, count, classes }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button onClick={increase} variant="contained" color="primary" className={classes.button}>
+        <Button onClick={onClickIncreaseCount} variant="contained" color="primary" className={classes.button}>
           increment
       </Button>
-        <Button onClick={reset} variant="contained" color="secondary" className={classes.button}>
+        <Button onClick={onClickResetCount} variant="contained" color="secondary" className={classes.button}>
           reset
       </Button>
-        <Button onClick={decrease} variant="contained" color="primary" className={classes.button}>
+        <Button onClick={onClickDecreaseCount} variant="contained" color="primary" className={classes.button}>
           decrement
       </Button>
       </CardActions>
@@ -34,9 +29,9 @@ const Counter = ({ reset, increase, decrease, count, classes }) => {
 
 Counter.propTypes = {
   classes: PropTypes.object.isRequired,
-  reset: PropTypes.func,
-  increase: PropTypes.func,
-  decrease: PropTypes.func,
-  count: PropTypes.number
+  onClickResetCount: PropTypes.func.isRequired,
+  onClickIncreaseCount: PropTypes.func.isRequired,
+  onClickDecreaseCount: PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired
 }
 export default withStyles(styles)(Counter);
