@@ -1,6 +1,7 @@
 import React from 'react';
 import Menu from '../containers/MenuContainer';
 import Login from '../views/Login';
+import { validateMail, validatePassword } from '../helpers/FormValidation';
 
 class LoginContainer extends React.Component {
     constructor(props) {
@@ -24,8 +25,8 @@ class LoginContainer extends React.Component {
         e.preventDefault();
         const { mail, password } = this.state;
 
-        let mailIsValid = this.validateMail(mail);
-        let passwordIsValid = this.validatePassword(password);
+        let mailIsValid = validateMail(mail);
+        let passwordIsValid = validatePassword(password);
 
         if (mailIsValid && passwordIsValid) {
             console.log(`Mail: ${mail}\nPassword: ${password}`);
@@ -36,13 +37,6 @@ class LoginContainer extends React.Component {
         else {
             this.setState({ mailIsValid, passwordIsValid });
         }
-    }
-    validateMail(mail) {
-        const pattern = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$');
-        return pattern.test(mail);
-    }
-    validatePassword(password) {
-        return password.length > 5;
     }
     render() {
         return (

@@ -25,6 +25,7 @@ const Menu = ({ classes, urls }) => {
                     <Tab icon={<HelpIcon />} label="О нас" href="#/about" />
                     <Tab icon={<AlarmIcon />} label="Счетчики" href="#/counters" />
                     <Tab icon={<PersonPinIcon />} label="Войти" href="#/login" />
+                    <Tab icon={<PersonPinIcon />} label="Войти с помощью redux" href="#/login-redux" />
                 </Tabs>
             </Paper>
         </div>
