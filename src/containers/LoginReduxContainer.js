@@ -12,7 +12,6 @@ class LoginReduxContainer extends React.Component {
         this.onChangeMail = this.onChangeMail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.Validate = this.Validate.bind(this);
 
         this.props.resetFields();
     }
@@ -35,10 +34,6 @@ class LoginReduxContainer extends React.Component {
             this.props.history.push(`${this.props.history.location.pathname}/success`);
         }
 
-    }
-    Validate(mail, password) {
-        this.props.validateMail(mail);
-        this.props.validatePassword(password);
     }
     render() {
         return (
