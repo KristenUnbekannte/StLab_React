@@ -7,5 +7,5 @@ export default theme => ({
     link: {
         textDecoration: 'none',
         color: '#f50057'
-    }
+    },
 });
