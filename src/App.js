@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import ParentContainer from './containers/ParentContainer';
+import Menu from './containers/MenuContainer';
+import About from './views/About';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
-        <ParentContainer />
-      </div>
+      <HashRouter>
+        <Switch>
+          <Route exact path="/" component={Menu} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/counters" component={ParentContainer} />
+          <Route children={() => <h2>404 - страница не найдена</h2>} />
+        </Switch>
+      </HashRouter>
     );
   }
 }
