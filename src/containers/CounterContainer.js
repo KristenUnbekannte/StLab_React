@@ -1,35 +1,36 @@
 import React from 'react';
-import Counter from '../views/Counter/index';
+import Counter from '../views/Counter';
 
 class CounterContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = { count: 0 };
 
-        this.increase = this.increase.bind(this);
-        this.decrease = this.decrease.bind(this);
-        this.reset = this.reset.bind(this);
+        this.onClickIncreaseCount = this.onClickIncreaseCount.bind(this);
+        this.onClickDecreaseCount = this.onClickDecreaseCount.bind(this);
+        this.onClickResetCount = this.onClickResetCount.bind(this);
     }
-    increase() {
+    onClickIncreaseCount() {
         this.setState({ count: this.state.count + 1 });
     }
-    decrease() {
+    onClickDecreaseCount() {
         this.setState({ count: this.state.count - 1 });
     }
-    reset() {
+    onClickResetCount() {
         this.setState({ count: 0 });
     }
 
     UNSAFE_componentWillReceiveProps(prop) {
         console.log("Child: UNSAFE_componentWillReceiveProps");
+
         let counter = this.state.count;
-        if (prop.action === "delete" && counter % 2 !== 0) {
+        if (prop.action === "deleteCounter" && counter % 2 !== 0) {
             this.setState({ count: --counter });
         }
-        else if (prop.action === "add" && counter % 2 === 0) {
+        else if (prop.action === "addCounter" && counter % 2 === 0) {
             this.setState({ count: ++counter });
         }
-        else if (prop.action === "reset") {
+        else if (prop.action === "resetCounter") {
             this.setState({ count: 0 });
         }
     }
@@ -41,6 +42,7 @@ class CounterContainer extends React.Component {
     }
     shouldComponentUpdate(nextProps, nextState) {
         console.log("Child: shouldComponentUpdate");
+
         if (this.state.count !== nextState.count) {
             return true;
         }
@@ -53,10 +55,12 @@ class CounterContainer extends React.Component {
     }
     render() {
         console.log("Child: render");
-        return <Counter increase={this.increase}
-            decrease={this.decrease}
-            reset={this.reset}
-            count={this.state.count} />
+        return (
+            <Counter onClickIncreaseCount={this.onClickIncreaseCount}
+                onClickDecreaseCount={this.onClickDecreaseCount}
+                onClickResetCount={this.onClickResetCount}
+                count={this.state.count} />
+        );
     }
 }
 export default CounterContainer;

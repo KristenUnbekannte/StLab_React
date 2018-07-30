@@ -1,6 +1,6 @@
 import React from 'react';
-import Menu from '../views/Menu/index';
-import Login from '../views/Login/index';
+import Menu from '../containers/MenuContainer';
+import Login from '../views/Login';
 
 class LoginContainer extends React.Component {
     constructor(props) {
@@ -8,50 +8,53 @@ class LoginContainer extends React.Component {
         this.state = { mail: "", password: "", mailIsValid: true, passwordIsValid: true };
 
         this.onChangeMail = this.onChangeMail.bind(this);
-        this.onChangePass = this.onChangePass.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    onChangeMail(e) {
-        var val = e.target.value;
-        this.setState({ mail: val });
+    onChangeMail(event) {
+        let mail = event.target.value;
+        this.setState({ mail });
     }
-    onChangePass(e) {
-        var val = e.target.value;
-        this.setState({ password: val });
+    onChangePassword(event) {
+        let password = event.target.value;
+        this.setState({ password });
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        let mailIsValid = this.validateMail(this.state.mail);
-        let passIsValid = this.validatePassword(this.state.password);
+        const { mail, password } = this.state;
 
-        if (mailIsValid && passIsValid) {
-            console.log(`Mail: ${this.state.mail}\nPassword: ${this.state.password}`);
-            alert(JSON.stringify({mail: this.state.mail, password: this.state.password}));
+        let mailIsValid = this.validateMail(mail);
+        let passwordIsValid = this.validatePassword(password);
+
+        if (mailIsValid && passwordIsValid) {
+            console.log(`Mail: ${mail}\nPassword: ${password}`);
+            alert(JSON.stringify({ mail: mail, password: password }));
+
             this.setState({ mail: "", password: "", mailIsValid: true, passwordIsValid: true });
         }
         else {
-            this.setState({ mailIsValid: mailIsValid, passwordIsValid: passIsValid });
+            this.setState({ mailIsValid, passwordIsValid });
         }
     }
     validateMail(mail) {
         const pattern = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$');
         return pattern.test(mail);
     }
-    validatePassword(pass) {
-        return pass.length > 5;
+    validatePassword(password) {
+        return password.length > 5;
     }
     render() {
         return (
             <div>
-                <Menu login={true} />
+                <Menu />
                 <Login handleSubmit={this.handleSubmit}
                     onChangeMail={this.onChangeMail}
-                    onChangePass={this.onChangePass}
+                    onChangePassword={this.onChangePassword}
                     mail={this.state.mail}
                     password={this.state.password}
-                    mailError={this.state.mailIsValid}
-                    passwordError={this.state.passwordIsValid}
+                    mailIsValid={this.state.mailIsValid}
+                    passwordIsValid={this.state.passwordIsValid}
                 />
             </div>
         );

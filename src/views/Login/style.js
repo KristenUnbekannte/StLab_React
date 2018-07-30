@@ -1,6 +1,6 @@
 import purple from '@material-ui/core/colors/purple';
 
-export const styles = theme => ({
+export default theme => ({
     container: {
         width:'320px', 
         padding:'20px',
@@ -12,11 +12,6 @@ export const styles = theme => ({
         flexDirection: 'column'
     },
     input: {
-        width: '300px',
-        marginBottom: '15px'
-    },
-    input_error: {
-        border: '1px solid red',
         width: '300px',
         marginBottom: '15px'
     },

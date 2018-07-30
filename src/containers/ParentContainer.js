@@ -1,34 +1,31 @@
 import React from 'react';
-import ParentCounter from '../views/ParentCounter/index';
+import ParentCounter from '../views/ParentCounter';
 import CounterContainer from './CounterContainer';
-import Menu from '../views/Menu/index';
+import Menu from '../containers/MenuContainer';
 
 class ParentContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { count: 1, arr: [0], action: "none" };
+        this.state = { arr: [0], action: "none" };
 
-        this.add = this.add.bind(this);
-        this.delete = this.delete.bind(this);
-        this.reset = this.reset.bind(this);
+        this.onClickAddCounter = this.onClickAddCounter.bind(this);
+        this.onClickDeleteCounter = this.onClickDeleteCounter.bind(this);
+        this.onClickResetCounter = this.onClickResetCounter.bind(this);
     }
-    add() {
+    onClickAddCounter() {
         let arr = this.state.arr;
-        arr.push(this.state.count);
-        this.setState({ count: this.state.count + 1, arr: arr, action: "add" });
+        arr.push(arr.length);
+        this.setState({ arr, action: "addCounter" });
     }
-    delete() {
-        if (this.state.count > 1) {
+    onClickDeleteCounter() {
+        if (this.state.arr.length > 1) {
             let arr = this.state.arr;
-            arr.splice(arr.length - 1);
-            this.setState({ count: this.state.count - 1, arr: arr, action: "delete" });
+            arr.pop();
+            this.setState({ arr, action: "deleteCounter" });
         }
     }
-    reset() {
-        this.setState({ count: 1, arr: [0], action: "reset" });
-    }
-    UNSAFE_componentWillReceiveProps(prop) {
-        console.log("Parent: UNSAFE_componentWillReceiveProps");
+    onClickResetCounter() {
+        this.setState({ arr: [0], action: "resetCounter" });
     }
     componentDidMount() {
         console.log("Parent: componentDidMount");
@@ -44,17 +41,27 @@ class ParentContainer extends React.Component {
     componentDidUpdate() {
         console.log("Parent: componentDidUpdate");
     }
+    static getDerivedStateFromProps() {
+        console.log("Parent: getDerivedStateFromProps");
+        return null;
+    }
+    getSnapshotBeforeUpdate() {
+        console.log("Parent: getSnapshotBeforeUpdate");
+        return null;
+    }
     render() {
         console.log("Parent: render");
-        return <div>
-            <Menu counters={true}/>
-            <ParentCounter add={this.add}
-                del={this.delete}
-                reset={this.reset} />
-            {
-                this.state.arr.map((item) => { return <CounterContainer key={item} action={this.state.action} /> })
-            }
-        </div>
+        return (
+            <div>
+                <Menu />
+                <ParentCounter onClickAddCounter={this.onClickAddCounter}
+                    onClickResetCounter={this.onClickResetCounter}
+                    onClickDeleteCounter={this.onClickDeleteCounter} />
+                {
+                    this.state.arr.map((item) => { return <CounterContainer key={item} action={this.state.action} /> })
+                }
+            </div>
+        );
     }
 }
 export default ParentContainer;

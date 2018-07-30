@@ -1,4 +1,4 @@
-export const styles = theme => ({
+export default theme => ({
   button: {
     margin: theme.spacing.unit,
   },

@@ -1,14 +1,10 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { styles } from './style';
+import { Paper, Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
+import styles from './style';
 
-const Login = ({ classes, handleSubmit, mail, password, onChangeMail, onChangePass, mailError, passwordError }) => {
+const Login = ({ classes, handleSubmit, mail, password, onChangeMail, onChangePassword, mailIsValid, passwordIsValid }) => {
     return <Paper className={classes.container}>
         <form onSubmit={handleSubmit} className={classes.form}>
             <FormControl className={classes.margin}>
@@ -22,10 +18,11 @@ const Login = ({ classes, handleSubmit, mail, password, onChangeMail, onChangePa
                     Mail
                 </InputLabel>
                 <Input
+                    error={!mailIsValid}
                     classes={{
                         underline: classes.cssUnderline,
                     }}
-                    className={mailError ? classes.input : classes.input_error}
+                    className={classes.input}
                     id="custom-css-input-mail"
                     value={mail} onChange={onChangeMail}
                 />
@@ -41,12 +38,13 @@ const Login = ({ classes, handleSubmit, mail, password, onChangeMail, onChangePa
                     Password
                 </InputLabel>
                 <Input
+                    error={!passwordIsValid}
                     classes={{
                         underline: classes.cssUnderline,
                     }}
-                    className={passwordError ? classes.input : classes.input_error}
+                    className={classes.input}
                     id="custom-css-input-pass"
-                    type="password" value={password} onChange={onChangePass}
+                    type="password" value={password} onChange={onChangePassword}
                 />
             </FormControl>
             <Button type="submit" variant="contained" color="primary" className={classes.button}>
@@ -62,12 +60,12 @@ const Login = ({ classes, handleSubmit, mail, password, onChangeMail, onChangePa
 
 Login.propTypes = {
     classes: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func,
-    mail: PropTypes.string,
-    password: PropTypes.string,
-    onChangeMail: PropTypes.func,
-    onChangePass: PropTypes.func,
-    mailError: PropTypes.bool,
-    passwordError: PropTypes.bool
+    handleSubmit: PropTypes.func.isRequired,
+    mail: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    onChangeMail: PropTypes.func.isRequired,
+    onChangePassword: PropTypes.func.isRequired,
+    mailIsValid: PropTypes.bool.isRequired,
+    passwordIsValid: PropTypes.bool.isRequired
 }
 export default withStyles(styles)(Login);
