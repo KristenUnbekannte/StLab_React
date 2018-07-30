@@ -4,6 +4,9 @@ export default theme => ({
         display: 'flex',
         justifyContent: 'center'
     },
+    tab:{
+        maxWidth: '300px'
+    },
     link: {
         textDecoration: 'none',
         color: '#f50057'

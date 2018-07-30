@@ -6,11 +6,15 @@ import About from './views/About';
 import LoginContainer from './containers/LoginContainer';
 import LoginReduxContainer from './containers/LoginReduxContainer';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import loginReducer from './reducers/LoginReduxReducer';
 import LoginSuccess from './views/Login-success';
+import LoginReduxFormContainer from './containers/LoginReduxFormContainer';
+import { reducer as formReducer } from 'redux-form'
 
-const store = createStore(loginReducer);
+const reducers = combineReducers({ login: loginReducer, form: formReducer });
+
+const store = createStore(reducers);
 
 class App extends Component {
   render() {
@@ -24,6 +28,8 @@ class App extends Component {
             <Route exact path="/login" component={LoginContainer} />
             <Route exact path="/login-redux" component={LoginReduxContainer} />
             <Route exact path="/login-redux/success" component={LoginSuccess} />
+            <Route exact path="/login-redux-form" component={LoginReduxFormContainer} />
+            <Route exact path="/login-redux-form/success" component={LoginSuccess} />
             <Route children={() => <h2>404 - страница не найдена</h2>} />
           </Switch>
         </HashRouter>

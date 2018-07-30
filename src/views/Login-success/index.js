@@ -31,8 +31,8 @@ LoginSuccess.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    mail: state.mail,
-    password: state.password
+    mail: state.login.mail,
+    password: state.login.password
   }
 };
 

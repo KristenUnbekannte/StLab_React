@@ -12,7 +12,6 @@ class LoginReduxContainer extends React.Component {
         this.onChangeMail = this.onChangeMail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.Validate = this.Validate.bind(this);
 
         this.props.resetFields();
     }
@@ -29,16 +28,12 @@ class LoginReduxContainer extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        const { mailIsValid, passwordIsValid } = this.props;
 
-        const { mailIsValid, passwordIsValid } = this.props.state;
         if (mailIsValid && passwordIsValid) {
             this.props.history.push(`${this.props.history.location.pathname}/success`);
         }
 
-    }
-    Validate(mail, password) {
-        this.props.validateMail(mail);
-        this.props.validatePassword(password);
     }
     render() {
         return (
@@ -47,10 +42,10 @@ class LoginReduxContainer extends React.Component {
                 <Login handleSubmit={this.handleSubmit}
                     onChangeMail={this.onChangeMail}
                     onChangePassword={this.onChangePassword}
-                    mail={this.props.state.mail}
-                    password={this.props.state.password}
-                    mailIsValid={this.props.state.mailIsValid}
-                    passwordIsValid={this.props.state.passwordIsValid}
+                    mail={this.props.mail}
+                    password={this.props.password}
+                    mailIsValid={this.props.mailIsValid}
+                    passwordIsValid={this.props.passwordIsValid}
                 />
             </div>
         );
@@ -58,7 +53,7 @@ class LoginReduxContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { state }
+    return { ...state.login }
 };
 
 const mapDispatchToProps = (dispatch) => {
