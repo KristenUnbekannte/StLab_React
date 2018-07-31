@@ -22,9 +22,11 @@ const Menu = ({ classes, urls }) => {
                     fullWidth
                     indicatorColor="secondary"
                     textColor="secondary">
-                    <Tab icon={<HelpIcon />} label="О нас" href="#/about" />
-                    <Tab icon={<AlarmIcon />} label="Счетчики" href="#/counters" />
-                    <Tab icon={<PersonPinIcon />} label="Войти" href="#/login" />
+                    <Tab className={classes.tab} icon={<HelpIcon />} label="О нас" href="#/about" />
+                    <Tab className={classes.tab} icon={<AlarmIcon />} label="Счетчики" href="#/counters" />
+                    <Tab className={classes.tab} icon={<PersonPinIcon />} label="Войти" href="#/login" />
+                    <Tab className={classes.tab} icon={<PersonPinIcon />} label="Войти с помощью redux" href="#/login-redux" />
+                    <Tab className={classes.tab} icon={<PersonPinIcon />} label="Войти с помощью redux-form" href="#/login-redux-form" />
                 </Tabs>
             </Paper>
         </div>
