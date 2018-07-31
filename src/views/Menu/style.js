@@ -4,8 +4,4 @@ export default theme => ({
         display: 'flex',
         justifyContent: 'center'
     },
-    link: {
-        textDecoration: 'none',
-        color: '#f50057'
-    }
 });

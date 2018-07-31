@@ -1,8 +1,8 @@
 import React from 'react';
 import { Paper, Tabs, Tab } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import AlarmIcon from '@material-ui/icons/Alarm';
 import HelpIcon from '@material-ui/icons/Help';
-import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import '../../App.css';
 import logo from '../../logo.svg';

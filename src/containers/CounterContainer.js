@@ -53,14 +53,6 @@ class CounterContainer extends React.Component {
     componentDidUpdate() {
         console.log("Child: componentDidUpdate");
     }
-    // static getDerivedStateFromProps() {
-    //     console.log("Child: getDerivedStateFromProps");
-    //     return null;
-    // }
-    // getSnapshotBeforeUpdate() {
-    //     console.log("Child: getSnapshotBeforeUpdate");
-    //     return null;
-    // }
     render() {
         console.log("Child: render");
         return (
