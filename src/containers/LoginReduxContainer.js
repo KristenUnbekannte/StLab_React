@@ -1,5 +1,4 @@
 import React from 'react';
-import Menu from '../containers/MenuContainer';
 import Login from '../views/Login';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
@@ -37,17 +36,14 @@ class LoginReduxContainer extends React.Component {
     }
     render() {
         return (
-            <div>
-                <Menu />
-                <Login handleSubmit={this.handleSubmit}
-                    onChangeMail={this.onChangeMail}
-                    onChangePassword={this.onChangePassword}
-                    mail={this.props.state.mail}
-                    password={this.props.state.password}
-                    mailIsValid={this.props.state.mailIsValid}
-                    passwordIsValid={this.props.state.passwordIsValid}
-                />
-            </div>
+            <Login handleSubmit={this.handleSubmit}
+                onChangeMail={this.onChangeMail}
+                onChangePassword={this.onChangePassword}
+                mail={this.props.state.mail}
+                password={this.props.state.password}
+                mailIsValid={this.props.state.mailIsValid}
+                passwordIsValid={this.props.state.passwordIsValid}
+            />
         );
     }
 }

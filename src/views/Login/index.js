@@ -1,67 +1,47 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import { Paper, Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import styles from './style';
+import theme from '../../common/formTheme';
 
-const Login = ({ classes, handleSubmit, mail, password, onChangeMail, onChangePassword, mailIsValid, passwordIsValid }) => {
+const Login = ({ handleSubmit, mail, password, onChangeMail, onChangePassword, mailIsValid, passwordIsValid }) => {
     return (
-        <Paper className={classes.container}>
-            <form onSubmit={handleSubmit} className={classes.form}>
-                <FormControl className={classes.margin}>
-                    <InputLabel
-                        FormLabelClasses={{
-                            root: classes.cssLabel,
-                            focused: classes.cssFocused,
-                        }}
-                        htmlFor="custom-css-input-mail"
-                    >
-                        Mail
-                </InputLabel>
-                    <Input
-                        error={!mailIsValid}
-                        classes={{
-                            underline: classes.cssUnderline,
-                        }}
-                        className={classes.input}
-                        id="custom-css-input-mail"
-                        value={mail} onChange={onChangeMail}
-                    />
-                </FormControl>
-                <FormControl className={classes.margin}>
-                    <InputLabel
-                        FormLabelClasses={{
-                            root: classes.cssLabel,
-                            focused: classes.cssFocused,
-                        }}
-                        htmlFor="custom-css-input-pass"
-                    >
-                        Password
-                </InputLabel>
-                    <Input
-                        error={!passwordIsValid}
-                        classes={{
-                            underline: classes.cssUnderline,
-                        }}
-                        className={classes.input}
-                        id="custom-css-input-pass"
-                        type="password" value={password} onChange={onChangePassword}
-                    />
-                </FormControl>
-                <Button type="submit" variant="contained" color="primary" className={classes.button}>
-                    Отправить
-            </Button>
-            </form>
-            <div>
-                <p>{mail}</p>
-                <p>{password}</p>
-            </div>
-        </Paper>
+        <MuiThemeProvider theme={theme}>
+            <Paper>
+                <form onSubmit={handleSubmit}>
+                    <FormControl>
+                        <InputLabel htmlFor="custom-css-input-mail">
+                            Mail
+                        </InputLabel>
+                        <Input
+                            id="custom-css-input-mail"
+                            error={!mailIsValid}
+                            value={mail}
+                            onChange={onChangeMail} />
+                    </FormControl>
+                    <FormControl>
+                        <InputLabel htmlFor="custom-css-input-pass">
+                            Password
+                        </InputLabel>
+                        <Input
+                            id="custom-css-input-pass"
+                            type="password"
+                            error={!passwordIsValid}
+                            value={password}
+                            onChange={onChangePassword} />
+                    </FormControl>
+                    <Button type="submit" variant="contained" color="primary">Отправить</Button>
+                </form>
+                <div>
+                    <p>{mail}</p>
+                    <p>{password}</p>
+                </div>
+            </Paper>
+        </MuiThemeProvider>
     );
 }
 
 Login.propTypes = {
-    classes: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     mail: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
@@ -70,4 +50,4 @@ Login.propTypes = {
     mailIsValid: PropTypes.bool.isRequired,
     passwordIsValid: PropTypes.bool.isRequired
 }
-export default withStyles(styles)(Login);
+export default Login;

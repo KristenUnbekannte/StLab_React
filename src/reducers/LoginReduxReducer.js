@@ -1,4 +1,4 @@
-import { validateMail, validatePassword } from '../helpers/FormValidation';
+import { validateMail, validatePassword } from '../common/FormValidation';
 
 const initialState = {
     mail: "",
