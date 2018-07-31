@@ -4,9 +4,7 @@ import Menu from '../views/Menu';
 class MenuContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            urls: ["#/about", "#/counters", "#/login", "#/login-redux", '#/login-redux-form']
-        };
+        this.state = { urls: ["#/about", "#/counters"] };
     }
     render() {
         return (

@@ -1,7 +1,6 @@
 import React from 'react';
 import ParentCounter from '../views/ParentCounter';
 import CounterContainer from './CounterContainer';
-import Menu from '../containers/MenuContainer';
 
 class ParentContainer extends React.Component {
     constructor(props) {
@@ -53,7 +52,6 @@ class ParentContainer extends React.Component {
         console.log("Parent: render");
         return (
             <div>
-                <Menu />
                 <ParentCounter onClickAddCounter={this.onClickAddCounter}
                     onClickResetCounter={this.onClickResetCounter}
                     onClickDeleteCounter={this.onClickDeleteCounter} />
