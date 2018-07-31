@@ -3,6 +3,7 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import ParentContainer from './containers/ParentContainer';
 import Menu from './containers/MenuContainer';
 import About from './views/About';
+import LoginContainer from './containers/LoginContainer';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
                 <Route exact path="/" />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/counters" component={ParentContainer} />
+                <Route exact path="/login" component={LoginContainer} />
                 <Redirect to="/not_found" />
               </Switch>
             </div>

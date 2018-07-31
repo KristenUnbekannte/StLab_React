@@ -16,7 +16,9 @@ const ParentCounter = ({ classes, onClickAddCounter, onClickDeleteCounter, onCli
             <Button onClick={onClickDeleteCounter} variant="fab" color="secondary" aria-label="Delete" className={classes.button}>
                 <DeleteIcon />
             </Button>
-            <Button onClick={onClickResetCounter} variant="fab" className={classes.button}> <ThreeSixtyIcon className={classes.icon} /></Button>
+            <Button onClick={onClickResetCounter} variant="fab" className={classes.button}>
+                <ThreeSixtyIcon className={classes.icon} />
+            </Button>
         </div>
     );
 }
