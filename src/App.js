@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import ParentContainer from './containers/ParentContainer';
 import Menu from './containers/MenuContainer';
 import About from './views/About';
@@ -10,11 +10,19 @@ class App extends Component {
     return (
       <HashRouter>
         <Switch>
-          <Route exact path="/" component={Menu} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/counters" component={ParentContainer} />
-          <Route exact path="/login" component={LoginContainer} />
-          <Route children={() => <h2>404 - страница не найдена</h2>} />
+          <Route path="/not_found" children={() => <h2>404 - страница не найдена</h2>} />
+          <Route>
+            <div>
+              <Menu />
+              <Switch>
+                <Route exact path="/" />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/counters" component={ParentContainer} />
+                <Route exact path="/login" component={LoginContainer} />
+                <Redirect to="/not_found" />
+              </Switch>
+            </div>
+          </Route>
         </Switch>
       </HashRouter>
     );

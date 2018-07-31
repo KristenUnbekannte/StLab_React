@@ -1,5 +1,4 @@
 import React from 'react';
-import Menu from '../containers/MenuContainer';
 import Login from '../views/Login';
 
 class LoginContainer extends React.Component {
@@ -46,8 +45,6 @@ class LoginContainer extends React.Component {
     }
     render() {
         return (
-            <div>
-                <Menu />
                 <Login handleSubmit={this.handleSubmit}
                     onChangeMail={this.onChangeMail}
                     onChangePassword={this.onChangePassword}
@@ -56,7 +53,6 @@ class LoginContainer extends React.Component {
                     mailIsValid={this.state.mailIsValid}
                     passwordIsValid={this.state.passwordIsValid}
                 />
-            </div>
         );
     }
 }
