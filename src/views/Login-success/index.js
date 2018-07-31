@@ -1,25 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { Paper, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
-import Menu from '../../containers/MenuContainer';
 import styles from './style';
 
 const LoginSuccess = ({ classes, mail, password }) => {
   return (
-    <div>
-      <Menu />
-      <Paper className={classes.root} elevation={1}>
-        <Typography variant="headline" component="h3">
-          Mail: {mail}
-        </Typography>
-        <Typography component="p">
-          Password: {password}
-        </Typography>
-      </Paper>
-    </div>
+    <Paper className={classes.root} elevation={1}>
+      <Typography variant="headline" component="h3">
+        Mail: {mail}
+      </Typography>
+      <Typography component="p">
+        Password: {password}
+      </Typography>
+    </Paper>
   );
 }
 

@@ -8,7 +8,7 @@ export default theme => ({
     paddingBottom: theme.spacing.unit * 2,
   },
   card: {
-    maxWidth: 345,
+    maxWidth: 340,
     margin: '20px auto 0 auto',
   },
 });

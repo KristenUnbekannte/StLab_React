@@ -3,13 +3,10 @@ import { withStyles } from '@material-ui/core/styles';
 import { List, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import PropTypes from 'prop-types';
-import Menu from '../../containers/MenuContainer';
 import styles from './style';
 
 const About = ({ classes }) => {
     return (
-        <div>
-        <Menu/>
         <div className={classes.root}>
           <List
             component="nav"
@@ -37,7 +34,6 @@ const About = ({ classes }) => {
                  в Республике Беларусь, головной офис и отдел развития бизнеса – в Нью-Йорке и Атланте, США." />
             </ListItem>
             </List>
-        </div>
         </div>
     )
 }

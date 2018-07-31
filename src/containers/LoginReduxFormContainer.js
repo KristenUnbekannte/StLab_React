@@ -1,10 +1,9 @@
 import React from 'react'
 import LoginReduxForm from '../views/LoginReduxForm';
-import Menu from '../containers/MenuContainer';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeMail, changePassword } from '../actions/LoginReduxActions';
-import { validateMail, validatePassword } from '../helpers/FormValidation';
+import { validateMail, validatePassword } from '../common/FormValidation';
 
 class LoginReduxContainer extends React.Component {
     submit = values => {
@@ -26,14 +25,11 @@ class LoginReduxContainer extends React.Component {
     render() {
         let { mail, password } = this.props.formState.values ? this.props.formState.values : "";
         return (
-            <div>
-                <Menu />
-                <LoginReduxForm
-                    onSubmit={this.submit}
-                    mail={mail}
-                    password={password}
-                    validate={this.validateValues} />
-            </div>
+            <LoginReduxForm
+                onSubmit={this.submit}
+                mail={mail}
+                password={password}
+                validate={this.validateValues} />
         );
     }
 }
