@@ -1,29 +1,46 @@
-export const changeMail = (mail) => {
-    return {
-        type: 'CHANGE_MAIL',
-        mail
-    }
-}
-export const changePassword = (password) => {
-    return {
-        type: 'CHANGE_PASSWORD',
-        password
-    }
-}
-export const validateMail = (mail) => {
-    return {
-        type: 'VALIDATE_MAIL',
-        mail
-    }
-}
-export const validatePassword = (password) => {
-    return {
-        type: 'VALIDATE_PASSWORD',
-        password
-    }
-}
+import actionTypes from './actionTypes';
+
+export const changeField = (field, value) => {
+	return {
+		type: actionTypes.CHANGE_FIELD,
+		field,
+		value,
+	};
+};
+export const changeReduxFormField = (field, value) => {
+	return {
+		type: actionTypes.CHANGE_REDUX_FORM_FIELD,
+		field,
+		value,
+	};
+};
+export const validateField = (field, value) => {
+	return {
+		type: actionTypes.VALIDATE_FIELD,
+		field,
+		value,
+	};
+};
 export const resetFields = () => {
-    return {
-        type: 'RESET_FIELDS'
-    }
-}
+	return {
+		type: actionTypes.RESET_FIELDS,
+	};
+};
+
+export const loginSuccess = () => {
+	return {
+		type: actionTypes.LOGIN_SUCCESS,
+	};
+};
+
+export const loginReduxFormSuccess = () => {
+	return {
+		type: actionTypes.LOGIN_REDUX_FORM_SUCCESS,
+	};
+};
+
+export const loginFail = () => {
+	return {
+		type: actionTypes.LOGIN_FAIL,
+	};
+};

@@ -1,49 +1,72 @@
-import React from 'react'
-import LoginReduxForm from '../views/LoginReduxForm';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { changeMail, changePassword } from '../actions/LoginReduxActions';
-import { validateMail, validatePassword } from '../common/FormValidation';
+import React from "react";
+import LoginReduxForm from "../views/LoginReduxForm";
+import Layout from "../common/Layout";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { formValueSelector } from "redux-form";
+import {
+  changeReduxFormField,
+  loginReduxFormSuccess
+} from "../actions/LoginReduxActions";
+import { validateMail, validatePassword } from "../common/FormValidation";
 
-class LoginReduxContainer extends React.Component {
-    submit = values => {
-        console.log(values);
-        this.props.changeMail(values.mail);
-        this.props.changePassword(values.password);
-        this.props.history.push(`${this.props.history.location.pathname}/success`);
+class LoginReduxFormContainer extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.validateValues = this.validateValues.bind(this);
+  }
+  handleSubmit(values) {
+    this.props.changeField("mail", values.mail);
+    this.props.changeField("password", values.password);
+    this.props.loginSuccess();
+    this.props.history.push(`${this.props.history.location.pathname}/success`);
+  }
+  validateValues(values) {
+    const errors = {};
+    if (!validateMail(values.mail)) {
+      errors.mail = true;
     }
-    validateValues = values => {
-        const errors = {}
-        if (!validateMail(values.mail)) {
-            errors.mail = 'Invalid email address'
-        }
-        if (!values.password || !validatePassword(values.password)) {
-            errors.password = 'Invalid password'
-        }
-        return errors;
+    if (!values.password || !validatePassword(values.password)) {
+      errors.password = true;
     }
-    render() {
-        let { mail, password } = this.props.formState.values ? this.props.formState.values : "";
-        return (
-            <LoginReduxForm
-                onSubmit={this.submit}
-                mail={mail}
-                password={password}
-                validate={this.validateValues} />
-        );
-    }
+    return errors;
+  }
+  render() {
+    return (
+      <Layout>
+        <LoginReduxForm
+          onSubmit={this.handleSubmit}
+          mail={this.props.mail}
+          password={this.props.password}
+          validate={this.validateValues}
+        />
+      </Layout>
+    );
+  }
 }
-const mapStateToProps = state => {
-    return {
-        formState: { ...state.form.login },
-        state: state
-    }
+
+LoginReduxFormContainer.propTypes = {
+  mail: PropTypes.string,
+  password: PropTypes.string,
+  changeField: PropTypes.func.isRequired,
+  loginSuccess: PropTypes.func.isRequired
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        changePassword: bindActionCreators(changePassword, dispatch),
-        changeMail: bindActionCreators(changeMail, dispatch),
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginReduxContainer);
+const mapStateToProps = state => {
+  return {
+    ...formValueSelector("login")(state, "mail", "password")
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    changeField: bindActionCreators(changeReduxFormField, dispatch),
+    loginSuccess: bindActionCreators(loginReduxFormSuccess, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginReduxFormContainer);
