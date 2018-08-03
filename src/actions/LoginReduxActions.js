@@ -28,8 +28,6 @@ export const loginSuccess = () => {
 	};
 };
 
-
-
 export const loginFail = () => {
 	return {
 		type: actionTypes.LOGIN_FAIL,
