@@ -23,5 +23,10 @@ export const urls = [
 		name: 'Войти с помощью redux',
 		url: '#/login-redux',
 		picture: <PersonPinIcon />,
-	}
+	},
+	{
+		name: 'Войти с помощью redux-form',
+		url: '#/login-redux-form',
+		picture: <PersonPinIcon />,
+	},
 ];

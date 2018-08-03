@@ -17,7 +17,7 @@ class LoginReduxContainer extends React.PureComponent {
 	}
 	onChangeField(event) {
 		const field = event.target.id;
-		const value = event.target.value;
+    const value = event.target.value;
 
 		this.props.changeField(field, value);
 		this.props.validateField(field, value);
@@ -31,8 +31,8 @@ class LoginReduxContainer extends React.PureComponent {
 			this.props.loginSuccess();
 			this.props.history.push(
 				`${this.props.history.location.pathname}/success`);
-		}
-		else {
+    } 
+    else {
 			this.props.loginFail();
 		}
 	}

@@ -7,7 +7,13 @@ export const changeField = (field, value) => {
 		value,
 	};
 };
-
+export const changeReduxFormField = (field, value) => {
+	return {
+		type: actionTypes.CHANGE_REDUX_FORM_FIELD,
+		field,
+		value,
+	};
+};
 export const validateField = (field, value) => {
 	return {
 		type: actionTypes.VALIDATE_FIELD,
@@ -15,7 +21,6 @@ export const validateField = (field, value) => {
 		value,
 	};
 };
-
 export const resetFields = () => {
 	return {
 		type: actionTypes.RESET_FIELDS,
@@ -28,7 +33,11 @@ export const loginSuccess = () => {
 	};
 };
 
-
+export const loginReduxFormSuccess = () => {
+	return {
+		type: actionTypes.LOGIN_REDUX_FORM_SUCCESS,
+	};
+};
 
 export const loginFail = () => {
 	return {
