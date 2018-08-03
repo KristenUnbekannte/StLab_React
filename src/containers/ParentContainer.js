@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from '../common/Layout';
 import ParentCounter from '../views/ParentCounter';
 import CounterContainer from './CounterContainer';
 
@@ -48,16 +49,18 @@ class ParentContainer extends React.Component {
 	render() {
 		console.log('Parent: render');
 		return (
-			<div>
-				<ParentCounter
-					onClickAddCounter={this.onClickAddCounter}
-					onClickResetCounter={this.onClickResetCounter}
-					onClickDeleteCounter={this.onClickDeleteCounter}
-				/>
-				{[...Array(this.state.counter)].map((item, i) => {
-					return <CounterContainer key={i} action={this.state.action} />;
-				})}
-			</div>
+			<Layout>
+				<div>
+					<ParentCounter
+						onClickAddCounter={this.onClickAddCounter}
+						onClickResetCounter={this.onClickResetCounter}
+						onClickDeleteCounter={this.onClickDeleteCounter}
+					/>
+					{[...Array(this.state.counter)].map((item, i) => {
+						return <CounterContainer key={i} action={this.state.action} />;
+					})}
+				</div>
+			</Layout>
 		);
 	}
 }
