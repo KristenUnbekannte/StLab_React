@@ -1,6 +1,7 @@
 import React from 'react';
 import AlarmIcon from '@material-ui/icons/Alarm';
 import HelpIcon from '@material-ui/icons/Help';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
 
 export const urls = [
 	{
@@ -12,5 +13,10 @@ export const urls = [
 		name: 'Счетчики',
 		url: '#/counters',
 		picture: <AlarmIcon />,
+	},
+	{
+		name: 'Войти',
+		url: '#/login',
+		picture: <PersonPinIcon />,
 	}
 ];
