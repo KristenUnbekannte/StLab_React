@@ -1,65 +1,77 @@
 import React from 'react';
-import Login from '../views/Login';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { changeMail, changePassword, validateMail, validatePassword, resetFields } from '../actions/LoginReduxActions';
+import PropTypes from 'prop-types';
+import Layout from '../common/Layout';
+import * as actions from '../actions/LoginReduxActions';
+import Login from '../views/Login';
 
-class LoginReduxContainer extends React.Component {
-    constructor(props) {
-        super(props);
+class LoginReduxContainer extends React.PureComponent {
+	constructor(props) {
+		super(props);
 
-        this.onChangeMail = this.onChangeMail.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+		this.onChangeField = this.onChangeField.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 
-        this.props.resetFields();
-    }
-    onChangeMail(event) {
-        let mail = event.target.value;
-        this.props.changeMail(mail);
-        this.props.validateMail(mail);
-    }
-    onChangePassword(event) {
-        let password = event.target.value;
-        this.props.changePassword(password);
-        this.props.validatePassword(password);
-    }
+		this.props.resetFields();
+	}
+	onChangeField(event) {
+		const field = event.target.id;
+		const value = event.target.value;
 
-    handleSubmit(event) {
-        event.preventDefault();
+		this.props.changeField(field, value);
+		this.props.validateField(field, value);
+	}
 
-        const { mailIsValid, passwordIsValid } = this.props.state;
-        if (mailIsValid && passwordIsValid) {
-            this.props.history.push(`${this.props.history.location.pathname}/success`);
-        }
+	handleSubmit(event) {
+		event.preventDefault();
+		const { mailIsValid, passwordIsValid } = this.props;
 
-    }
-    render() {
-        return (
-            <Login handleSubmit={this.handleSubmit}
-                onChangeMail={this.onChangeMail}
-                onChangePassword={this.onChangePassword}
-                mail={this.props.state.mail}
-                password={this.props.state.password}
-                mailIsValid={this.props.state.mailIsValid}
-                passwordIsValid={this.props.state.passwordIsValid}
-            />
-        );
-    }
+		if (mailIsValid && passwordIsValid) {
+			this.props.loginSuccess();
+			this.props.history.push(
+				`${this.props.history.location.pathname}/success`);
+		}
+		else {
+			this.props.loginFail();
+		}
+	}
+	render() {
+		return (
+			<Layout>
+				<Login
+					handleSubmit={this.handleSubmit}
+					onChangeField={this.onChangeField}
+					mail={this.props.mail}
+					password={this.props.password}
+					mailIsValid={this.props.mailIsValid}
+					passwordIsValid={this.props.passwordIsValid}
+				/>
+			</Layout>
+		);
+	}
 }
 
-const mapStateToProps = state => {
-    return { state }
+LoginReduxContainer.propTypes = {
+	mail: PropTypes.string.isRequired,
+	password: PropTypes.string.isRequired,
+	mailIsValid: PropTypes.bool.isRequired,
+	passwordIsValid: PropTypes.bool.isRequired,
+	changeField: PropTypes.func.isRequired,
+	loginSuccess: PropTypes.func.isRequired,
+	validateField: PropTypes.func.isRequired,
+	resetFields: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        changePassword: bindActionCreators(changePassword, dispatch),
-        changeMail: bindActionCreators(changeMail, dispatch),
-        validatePassword: bindActionCreators(validatePassword, dispatch),
-        validateMail: bindActionCreators(validateMail, dispatch),
-        resetFields: bindActionCreators(resetFields, dispatch)
-    }
-}
+const mapStateToProps = state => {
+	return { ...state.login };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginReduxContainer);
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators({ ...actions }, dispatch);
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(LoginReduxContainer);

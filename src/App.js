@@ -1,43 +1,47 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
 import ParentContainer from './containers/ParentContainer';
-import Menu from './containers/MenuContainer';
+import Layout from './common/Layout';
 import About from './views/About';
 import LoginContainer from './containers/LoginContainer';
 import LoginReduxContainer from './containers/LoginReduxContainer';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import loginReducer from './reducers/LoginReduxReducer';
-import LoginSuccess from './views/Login-success';
+import loginReduxReducer from './reducers/LoginReduxReducer';
+import LoginSuccess from './views/LoginSuccess';
+import PrivateRoute from './common/PrivateRoute';
 
-const store = createStore(loginReducer);
+const reducers = combineReducers({
+	login: loginReduxReducer,
+});
+const store = createStore(
+	reducers,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <HashRouter>
-          <Switch>
-            <Route path="/not_found" children={() => <h2>404 - страница не найдена</h2>} />
-            <Route>
-              <div>
-                <Menu />
-                <Switch>
-                  <Route exact path="/" />
-                  <Route exact path="/about" component={About} />
-                  <Route exact path="/counters" component={ParentContainer} />
-                  <Route exact path="/login" component={LoginContainer} />
-                  <Route exact path="/login-redux" component={LoginReduxContainer} />
-                  <Route exact path="/login-redux/success" component={LoginSuccess} />
-                  <Redirect to="/not_found" />
-                </Switch>
-              </div>
-            </Route>
-          </Switch>
-        </HashRouter>
-      </Provider>
-    );
-  }
+	render() {
+		return (
+			<Provider store={store}>
+				<HashRouter>
+					<Switch>
+						<Route exact path="/" component={Layout} />
+						<Route exact path="/about" component={About} />
+						<Route exact path="/counters" component={ParentContainer} />
+						<Route exact path="/login" component={LoginContainer} />
+						<Route exact path="/login-redux" component={LoginReduxContainer} />
+						<PrivateRoute
+							exact
+							path="/login-redux/success"
+							component={LoginSuccess}
+							redirect="/login-redux"
+						/>
+						<Route children={() => <h2>404 - страница не найдена</h2>} />
+					</Switch>
+				</HashRouter>
+			</Provider>
+		);
+	}
 }
 
 export default App;

@@ -1,41 +1,43 @@
-import React from 'react';
-import { Paper, Tabs, Tab } from '@material-ui/core';
-import AlarmIcon from '@material-ui/icons/Alarm';
-import HelpIcon from '@material-ui/icons/Help';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
-import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
-import '../../App.css';
-import logo from '../../logo.svg';
-import styles from './style';
+import React from "react";
+import { Paper, Tabs, Tab } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import { urls } from "../../constants/urls";
+import styles from "./style";
 
-const Menu = ({ classes, urls }) => {
-    let urlActiveTab = urls.indexOf(window.location.hash);
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-            </header>
-            <Paper>
-                <Tabs className={classes.tabs}
-                    value={urlActiveTab === -1 ? false : urlActiveTab}
-                    fullWidth
-                    indicatorColor="secondary"
-                    textColor="secondary">
-                    <Tab icon={<HelpIcon />} label="О нас" href="#/about" />
-                    <Tab icon={<AlarmIcon />} label="Счетчики" href="#/counters" />
-                    <Tab icon={<PersonPinIcon />} label="Войти" href="#/login" />
-                    <Tab icon={<PersonPinIcon />} label="Войти с помощью redux" href="#/login-redux" />
-                </Tabs>
-            </Paper>
-        </div>
-    );
-}
+const Menu = ({ classes }) => {
+  let urlActiveTab = urls
+    .map(item => {
+      return item.url;
+    })
+    .indexOf(window.location.hash);
+  return (
+    <Paper>
+      <Tabs
+        className={classes.tabs}
+        value={urlActiveTab === -1 ? false : urlActiveTab}
+        fullWidth
+        indicatorColor="secondary"
+        textColor="secondary"
+      >
+        {urls.map((item, i) => {
+          return (
+            <Tab
+              className={classes.tab}
+              key={i}
+              icon={item.picture}
+              label={item.name}
+              href={item.url}
+            />
+          );
+        })}
+      </Tabs>
+    </Paper>
+  );
+};
 
 Menu.propTypes = {
-    classes: PropTypes.object.isRequired,
-    urls: PropTypes.array.isRequired
-}
+  classes: PropTypes.object.isRequired
+};
 
 export default withStyles(styles)(Menu);
-
