@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import CounterContainer from './containers/CounterContainer';
-import registerServiceWorker from './registerServiceWorker';
+import App from './App';
 
-ReactDOM.render(<CounterContainer />, document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render(<App />, document.getElementById('root'));
